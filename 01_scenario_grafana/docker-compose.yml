@@ -41,6 +41,6 @@ services:
 networks:
   default:
   
-volumes: # Creates a volume to persit the data in the database
+# volumes: # Creates a volume to persit the data in the database
   # mongo-db: ~
   # mysql-db: ~
