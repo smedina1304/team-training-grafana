@@ -11,28 +11,6 @@ version: "3.8" # Version for the docker compose
 services:
 
   # Databases
-  mongo-db:
-    image: mongo:4.4 # Loads this image from Docker Hub
-    hostname: mongo-db # Create a hostname to be easier to find the container in the network
-    container_name: db-mongo # Create a container name to be easier to get information for it
-    expose:
-      - "27017" # Expose this port to the network
-    ports:
-      - "27017:27017" # match port 27017 on the machine to the one in the container
-    networks:
-      - default # Users a local network called default
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root123
-    volumes: # Uses a volume to persit the data in the database
-      # ./db/mongo/data:/data
-      - mongo-db:/data
-    healthcheck: # check if Mongo DB is healthy
-      test: |
-        host=`hostname --ip-address || echo '127.0.0.1'`; 
-        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
-      interval: 5s
-
   mysql-db:
     restart: always
     image: mysql:5.7
@@ -64,5 +42,5 @@ networks:
   default:
   
 volumes: # Creates a volume to persit the data in the database
-  mongo-db: ~
-#   mysql-db: ~
+  # mongo-db: ~
+  # mysql-db: ~
