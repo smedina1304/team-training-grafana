@@ -1,0 +1,55 @@
+# WARNING: Do not deploy this tutorial configuration directly to a production environment
+#
+# The tutorial docker-compose files have not been written for production deployment and will not 
+# scale. A proper architecture has been sacrificed to keep the narrative focused on the learning 
+# goals, they are just used to deploy everything onto a single Docker machine. All FIWARE components 
+# are running at full debug and extra ports have been exposed to allow for direct calls to services. 
+# They also contain various obvious security flaws - passwords in plain text, no load balancing,
+# no use of HTTPS and so on. 
+# 
+version: "3.8" # Version for the docker compose
+services:
+
+  # Database
+  postgres-db:
+    image: postgres
+    container_name: postgresql
+    hostname: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    volumes:
+      - ./db/postgresql:/var/lib/postgresql/data
+
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    hostname: pgadmin4
+    restart: always
+    depends_on:
+        - postgres-db    
+    ports:
+      - "5050:5050"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - ./db/pgadmin:/var/lib/pgadmin
+
+  # Grafana
+  grafana:
+    image: grafana/grafana
+    hostname: grafana
+    container_name: grafana
+    depends_on:
+        - postgres-db
+    ports:
+        - "3000:3000"
+
+networks:
+  default:
+

@@ -1,7 +1,13 @@
-#######################
+#################################
 # 01_scenario_grafana
 # - db files
-#######################
+#################################
 01_scenario_grafana/db/
 01_scenario_grafana\db\
 
+#################################
+# 02_scenario_grafana_pg
+# - db files
+#################################
+02_scenario_grafana_pg/db/
+02_scenario_grafana_pg\db\
