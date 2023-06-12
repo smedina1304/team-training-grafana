@@ -33,7 +33,7 @@ services:
     depends_on:
         - postgres-db    
     ports:
-      - "5050:5050"
+      - "8080:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@localhost.com
       PGADMIN_DEFAULT_PASSWORD: admin
