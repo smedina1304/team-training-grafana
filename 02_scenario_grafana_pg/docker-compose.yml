@@ -37,8 +37,8 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@localhost.com
       PGADMIN_DEFAULT_PASSWORD: admin
-    volumes:
-      - ./db/pgadmin:/var/lib/pgadmin
+    # volumes:
+    #   - ./db/pgadmin:/var/lib/pgadmin
 
   # Grafana
   grafana:
